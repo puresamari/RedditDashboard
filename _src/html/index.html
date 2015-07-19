@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<script src="js/main.min.js"></script>
+		<link href="css/style.min.css" rel="stylesheet" type="text/css"/>
+		
+		<!-- jquery -->
+		<script src="js/lib/jquery.min.js"></script>
+		
+		<!-- bootstrap & bootflat -->
+		<script src="js/lib/bootstrap.min.js"></script>
+		<link href="css/lib/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="css/lib/bootflat.min.css" rel="stylesheet" type="text/css"/>
+		
+		<!-- fontawesome -->
+		<link href="css/lib/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div class="navbar navbar-default navbar-static-top">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+					<div class="nav navbar-nav">
+						<ol class="breadcrumb">
+							<li class="active">
+								<a href="#"><i class="image fa fa-reddit"></i> reddit.com</a>
+							</li>
+							<li><a href="#">r</a></li>
+							<li class="active">
+								<div class="dropdown subred-list">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+										<i class="active-subred">No Subred</i>
+										<i class="caret"></i>
+									</a>
+									<ul class="dropdown-menu" role="menu">
+									</ul>
+								</div>
+							</li>
+						</ol>
+					</div>
+					<form class="navbar-form navbar-right subred-search" role="search">
+						<div class="form-search search-only">
+							<i class="search-icon glyphicon glyphicon-search"></i>
+							<input type="text" class="form-control search-query">
+						</div>
+					</form>
+				</div>
+			</div>
+			<div>
+				<div class="sidebar sidebarclose">
+					<div class="container-fluid">
+						<div onClick="ToggleSidebar()" class="row btn clickable collapse-turn">
+							<span class="icon fa fa-chevron-circle-left"></span>
+							<div class="text">Collapse</div>
+						</div>
+						<div class="row"></div>
+						<div class="row btn clickable">
+							<span class="icon fa fa-area-chart"></span>
+							<div class="text">Statistics</div>
+						</div>
+						<div class="row btn clickable">
+							<span class="icon fa fa-filter"></span>
+							<div class="text">Filter</div>
+						</div>
+					</div>
+				</div>
+				<div class="content"></div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -5,7 +5,17 @@ module.exports = function(grunt) {
 			dist: {
 				options: {             
 					style: 'compressed',
-					sourcemap: 'none'
+					sourcemap: 'none',
+					compass: true
+				},
+				files: {                        
+					'_dist/css/style.min.css': '_src/css/**/*.scss'
+				}
+			},
+			dev: {
+				options: {
+					sourcemap: 'none',
+					compass: true
 				},
 				files: {                        
 					'_dist/css/style.min.css': '_src/css/**/*.scss'
@@ -13,15 +23,13 @@ module.exports = function(grunt) {
 			}
 		},
 		bowercopy: {
-			options: {
-				// Task-specific options go here 
-			},
 			bootstrap: {
 				options: {
 					destPrefix: '_dist'
 				},
 				files: {
 					'css/lib' : 'bootstrap/**/bootstrap.min.css',
+					'css/fonts' : 'bootstrap/fonts',
 					'js/lib' : 'bootstrap/**/bootstrap.min.js'
 				}
 			},
@@ -40,47 +48,31 @@ module.exports = function(grunt) {
 				src : 'jquery/**/jquery.min.js'
 			}
 		},
-		/*concat: {
-			css: {
-				src: '_src/css/libs/*.css',
-				dest: '_dist/css/libs.min.css'
-			},
-			js: {
-				src: '_src/js/libs/*.js',
-				dest: '_dist/js/libs.min.js'
-			},
-			js: {
-				src: '_src/html/*.html',
-				dest: '_dist/index.html'
-			}
-		},*/
-		compass: {                  // Task
-			dist: {                   // Target
-				options: {              // Target options
-					sassDir: '_src/css/**/*.scss', // '_dist/css/style.min.css': '_src/css/**/*.scss'
-					cssDir: '_dist/css/style.min.css',
-					environment: 'production'
-				}
-			}
-		},
 		uglify: {
-			options: {
-				mangle: true
-			},
-			my_target: {
+			dist: {
+				options: {
+					mangle: true
+				},
 				files: {
-					'_dist/js/main.min.js': '_src/js/main.js',
-					'_dist/css/style.min.js': '_src/css/style.css'
+					'_dist/js/main.min.js': '_src/js/main.js'
+				}
+			},
+			dev: {
+				options: {
+					mangle: false
+				},
+				files: {
+					'_dist/js/main.min.js': '_src/js/main.js'
 				}
 			}
 		},
-		htmlmin: {                                     // Task
-			dist: {                                      // Target
-				options: {                                 // Target options
+		htmlmin: {                                     
+			dist: {                                     
+				options: {                                 
 					removeComments: true,
 					collapseWhitespace: true
 				},
-				files: {                                   // Dictionary of files
+				files: { 
 					'_dist/index.html': '_src/html/index.html'
 				}
 			}
@@ -94,5 +86,24 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
-	grunt.registerTask('default', ['sass', 'bowercopy',  'uglify', 'htmlmin']);
+	grunt.registerTask('logging', 'This tasks logs dev operations', function() {
+		var tasks = ['sass:dev', 'bowercopy',  'uglify:dev', 'htmlmin'];
+		
+		grunt.log.writeln("Started Logging");
+		
+		var wordlistoptions = {
+			separator: ', ',
+			color: 'cyan',
+		};
+		
+		grunt.log.write("Loaded Tasks: ");
+		grunt.log.wordlist(tasks, [wordlistoptions]);
+		
+		
+	});
+
+
+	grunt.registerTask('default', ['sass:dist', 'bowercopy',  'uglify:dist', 'htmlmin']);
+	grunt.registerTask('dev', ['sass:dev', 'bowercopy',  'uglify:dev', 'htmlmin']);
+	//grunt.registerTask('logging', ['dev(["sass:dev", "bowercopy",  "uglify:dev", "htmlmin"])']);
 };
